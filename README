@@ -1,0 +1,27 @@
+Overview
+ 
+    Yamba publishes data through Tor and onto the Bitcoin blockchain, thereby
+    providing an anonymous channel through which whistle-blowers may blow 
+    their whistles.
+
+
+
+Pricing 
+
+    This is not free, unfortunately. Publishers must pay transaction fees
+    necessary to record their information on the blockchain. Total expenses
+    amount proportionally to content length.
+
+
+
+Installation
+
+    pip install https://github.com/dasmithii/Yamba
+
+      [or]
+
+    git clone 
+    https://github.com/dasmithii/Yamba
+    cd Yamba
+    python setup.py install
+
