@@ -16,10 +16,13 @@ Options:
 	--document=<>   Look up by sender address.
 """
 from docopt import docopt
+import tor
 
 def main():
 	args = docopt(__doc__, version='Yamba 0.0.1')
-	print args
+	tor.prepare()
+	print tor.query("http://dasmithii.github.io/journal/writings/Disclaimer.txt")
+	tor.cleanup()
 
 if __name__ == '__main__':
 	main()
