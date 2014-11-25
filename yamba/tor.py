@@ -12,22 +12,17 @@ from stem.util import term
 tor_process = None
 
 
-#
-def prepared():
-	return tor_process is not None
-
-
 # 
 def cleanup():
-	if prepared():
+	if tor_process is not None:
 		tor_process.kill()
 
 
 # Uses urllib to fetch a site using SocksiPy for Tor over
 # the SOCKS_PORT.
 def query(url):
-	if not prepared():
-		raise 'tried to use Tor before calling prepare()'
+	if tor_process is None:
+		prepare()
 	try:
 		return urllib.urlopen(url).read()
 	except:
