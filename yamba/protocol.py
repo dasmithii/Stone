@@ -89,4 +89,8 @@ def decode(addresses):
 	parts = map(extract, addresses)
 	padded = ''.join(parts)
 	compressed = unpad(padded)
+	decompressed = decompress(compressed)
+	version, data = decompressed[0], decompressed[1:]
+	if version != VERSION:
+		raise BaseException("versions don't match")
 	return decompress(compressed)[1:]
