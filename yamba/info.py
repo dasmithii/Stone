@@ -6,5 +6,8 @@ def query(call):
 
 
 def block_count():
-	return int(query('getblockcount'))
+	"""Return blockchain.info's most recent block count. This is 
+	useful in comparison with the local blockcount, which may be
+	lagging behind."""
+	return int(tor.query('getblockcount'))
 
