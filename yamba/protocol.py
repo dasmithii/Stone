@@ -5,6 +5,8 @@ from bitcoin import base58
 import bitcoin.core
 
 
+VERSION = '1'
+
 
 CHARACTERS_IN_ADDRESS = 34
 BYTES_IN_PAYLOAD = 20
@@ -70,11 +72,11 @@ def unpad(data):
 	return data[1:-padding]
 
 
-
 def encode(data):
 	"""Compresses and pads data before distributing it accross
 	a series of valid bitcoin addresses.
 	"""
+	data = VERSION + data
 	compressed = compress(data)
 	padded = pad(compressed)
 	parts = [padded[i:i+BYTES_IN_PAYLOAD] for i in range(0, len(padded), BYTES_IN_PAYLOAD)]
@@ -87,4 +89,4 @@ def decode(addresses):
 	parts = map(extract, addresses)
 	padded = ''.join(parts)
 	compressed = unpad(padded)
-	return decompress(compressed)
+	return decompress(compressed)[1:]
