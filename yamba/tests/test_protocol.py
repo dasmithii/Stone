@@ -1,6 +1,7 @@
 import unittest
 from .. import protocol as p
 import os
+from bitcoin import rpc
 import random
 
 
@@ -36,3 +37,24 @@ def form_inverse(f1, f2):
 Test_compression = form_inverse(p.compress, p.decompress)
 Test_padding = form_inverse(p.pad, p.unpad)
 Test_protocol = form_inverse(p.encode, p.decode)
+
+
+
+class Test_addresses(unittest.TestCase):
+
+  def test(self):
+    def once():
+      data = random_bytes(p.BYTES_IN_PAYLOAD)
+      addr = p.squeeze(data)
+      valid = rpc.Proxy().validateaddress(addr)['isvalid']
+      self.assertTrue(valid)
+
+    for i in range(25):
+      once()
+
+
+
+
+
+
+
