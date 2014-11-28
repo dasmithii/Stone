@@ -72,12 +72,18 @@ def unpad(data):
 
 
 def encode(data):
+	"""Compresses and pads data before distributing it accross
+	a series of valid bitcoin addresses.
+	"""
 	compressed = compress(data)
 	padded = pad(compressed)
 	parts = [padded[i:i+BYTES_IN_PAYLOAD] for i in range(0, len(padded), BYTES_IN_PAYLOAD)]
 	return map(squeeze, parts)
 
 def decode(addresses):
+	"""Reverses the encoding process, rejoining, unpadding, and
+	decompressing data.
+	"""
 	parts = map(extract, addresses)
 	padded = ''.join(parts)
 	compressed = unpad(padded)
