@@ -1,7 +1,7 @@
 """Yamba
 
 Usage:
-	yamba price (--path=<> | --data=<>)
+	yamba cost (--path=<> | --data=<>)
 	yamba --wallet=<> (--path=<> | --data=<>)
 	yamba feed [--from=<>]
 	yamba cat <document>

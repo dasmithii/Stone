@@ -1,9 +1,12 @@
 Overview
- 
+
     Yamba publishes data through Tor and onto the Bitcoin blockchain, thereby
     providing an anonymous channel through which whistle-blowers may blow 
     their whistles unforgettably.
 
+    In addition, it is capable of downloading published works from the
+    blockchain. These are identified by sender address.
+     
 
 
 Pricing 
