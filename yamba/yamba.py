@@ -2,25 +2,38 @@
 
 Usage:
 	yamba cost (--path=<> | --data=<>)
-	yamba --wallet=<> (--path=<> | --data=<>)
-	yamba feed [--from=<>]
-	yamba cat <document>
+	yamba --wallet=<> (--path=<> | --data=<>) --tor
+	yamba cat <txid> --tor
 
 Options:
-	-h --help       Show this screen.
-	-v --version    Show version.
-	--data=<>    Specify content in string form.
-	--path=<>       Specify path to content.
-	--wallet=<>     Specify BTC wallet to pay with.
-	--from=<>       Specify begin date and time.      [default: now]
-	--document=<>   Look up by sender address.
+	-h --help           Show this screen.
+	-v --version        Show version.
+	--data=<>           Specify content in string form.
+	--path=<>           Specify path to content.
+	--wallet=<>         Specify BTC wallet to pay with.
+	--tor               Perform operation over the Tor network.
 """
 from docopt import docopt
-import tor
+import btc
+
+
+def data(args):
+	if args['--data'] is not None:
+		return args['--data']
+	with open(args['--path']) as f:
+		return f.read()
+
 
 def main():
 	args = docopt(__doc__, version='Yamba 0.0.1')
-	print tor.query("http://dasmithii.github.io/journal/writings/Disclaimer.txt")
+	if args['cost']:
+		amount = btc.price_without_fee(data(args))
+		output = '{:5.7f} - (w/o transaction fees)'.format(amount)
+		print(output)
+	elif args['cat']:
+		print btc.read(args['<txid>'])
+	else:
+		pass
 
 if __name__ == '__main__':
 	main()

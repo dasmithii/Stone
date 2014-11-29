@@ -71,7 +71,6 @@ def unpad(data):
 	padding = ord(data[0])
 	return data[1:-padding]
 
-
 def encode(data):
 	"""Compresses and pads data before distributing it accross
 	a series of valid bitcoin addresses.
