@@ -9,7 +9,7 @@ def price_without_fee(data):
 	return 0.00005430 * len(addresses)
 
 
-def publish(data):
+def publish(data, tor=False):
 	"""Encode data via protocol.py and attempt to publish it to
 	the main blockchain within one transaction of many outputs.
 
@@ -18,6 +18,9 @@ def publish(data):
 	doesn't currently provide a sendmany interface. Hopefully
 	this will change soon.
 	"""
+	if tor:
+		raise NotImplementedError('Tor')
+
 	addresses = protocol.encode(data)
 	def prepare(x):
 		return '"' + x + '"' + ':' + '0.00005430'
@@ -31,7 +34,7 @@ def publish(data):
 	}
 
 
-def trusted_read(txid):
+def trusted_read(txid, go_anon=False):
 	"""Reads transaction via blockchain.info API. 
 
 	This is nice because it doesn't require that callers have run
@@ -39,6 +42,7 @@ def trusted_read(txid):
 	it relies on a centralized server. Use wallet_read() or 
 	local_read() whenever possible.
 	"""
+	info.using_tor = go_anon
 	transaction = info.transaction(txid)
 	addresses = []
 	for o in transaction['out']:
@@ -47,7 +51,7 @@ def trusted_read(txid):
 	return protocol.decode(addresses)
 
 
-def read(txid):
+def read(txid, tor=False):
 	"""Decode data from transaction.
 
 	Depending on the configuration of bitcoind, non-wallet 
@@ -56,4 +60,4 @@ def read(txid):
 
 	TODO: FINISH IMPLEMENTING
 	"""
-	return trusted_read(txid)
+	return trusted_read(txid, tor)
