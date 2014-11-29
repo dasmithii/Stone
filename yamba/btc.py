@@ -1,3 +1,4 @@
+import info
 import protocol
 import bitcoin.rpc
 import subprocess
@@ -13,7 +14,6 @@ def publish(data):
 	this will change soon.
 	"""
 	addresses = protocol.encode(data)
-	proxy = bitcoin.rpc.Proxy()
 	def prepare(x):
 		return '"' + x + '"' + ':' + '0.00005430'
 	amounts = '{' + ','.join(map(prepare, addresses)) + '}'
@@ -21,6 +21,31 @@ def publish(data):
 		                                                                  stderr=subprocess.PIPE)
 	o, e = process.communicate()
 	return {
-		'output': o,
+		'output': o[0:-1],
 		'error': e
 	}
+
+
+def read(txid):
+	"""Decode data from transaction.
+
+	Depending on the configuration of bitcoind, non-wallet 
+	transactions may or may not be visible. If they aren't
+	query blockchain.info instead.
+	"""
+
+
+def trusted_read(txid):
+	"""Reads transaction via blockchain.info API. 
+
+	This is nice because it doesn't require that callers have run
+	Bitcoin nodes on their machines. But it is dangerous, too, as
+	it relies on a centralized server. Use local_read() whenever
+	possible.
+	"""
+	transaction = info.transaction(txid)
+	addresses = []
+	for o in transaction['out']:
+		if o['value'] == 5430:
+			addresses.append(o['addr'])
+	return protocol.decode(addresses)
