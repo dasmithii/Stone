@@ -1,15 +1,26 @@
 Overview
 
     This is a tool for publishing to and reading from the Bitcoin
-    blockchain. For a fee proportional to content length, it will
+    blockchain. For fees proportional to content length, it will
     render your inputs "written in stone" and addressable by
     transaction ID.
 
-    Per rule of Bitcoin protocol, published data becomes part of an
-    immutable history. Transactions propogate to thousands of nodes
-    worldwide. And to modify these, one must first attain majority
-    mining power in the network. So, for all practical purposes, the
-    integrity of write calls mirror that of Bitcoin as a whole.
+    Per rule of Bitcoin protocol, these are writes to immutable 
+    history - modifiable only by majority mining power. In just 
+    minutes, they propagate to thousands of nodes around the 
+    world, and for all practical purposes, mirror the integrity
+    of Bitcoin as a whole.
+
+    Unrelatedly, Tor may be used to anonymize read and write 
+    activity. Appending the --tor flag to Stone commands will
+    proxy your requests, decoupling you from your published 
+    content. But still, you may prove status as publisher via 
+    digital signing.
+
+    Note that anonymity is not guaranteed, as transactions may be
+    traced backwards to identify voiding actions of your past. See
+    https://en.bitcoin.it/wiki/Anonymity for more information on 
+    this point.
 
 
 
