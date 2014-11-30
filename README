@@ -1,19 +1,28 @@
 Overview
 
-    Yamba publishes data through Tor and onto the Bitcoin blockchain, thereby
-    providing an anonymous channel through which whistle-blowers may blow 
-    their whistles unforgettably.
+    This is a tool for publishing to and reading from the Bitcoin
+    blockchain. For a fee proportional to content length, it will
+    render your inputs "written in stone" and addressable by
+    transaction ID.
 
-    In addition, it is capable of downloading published works from the
-    blockchain. These are identified by sender address.
-     
+    Per rule of the Bitcoin protocol, published data becomes part of
+    immutable history. Transactions propogate to thousands of nodes
+    worldwide. And to modify these, one must first attain majority
+    mining power in the network. So, for all practical purposes, the
+    integrity of write calls mirror that of Bitcoin as a whole.
+    
 
 
-Pricing 
+Usage
 
-    This is not free, unfortunately. Publishers must pay transaction fees
-    necessary to record their information on the blockchain. Expenses amount
-    proportionally to content length.
+    Reading and writing:
+     >  stone write --data="hello, world!"
+     >  stone write --path="example.txt"
+     >  stone read <txid>
+
+    Cost estimation:
+     >  stone price --data="hello, world!"
+     >  stone price --path="example.txt"
 
 
 
