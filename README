@@ -20,11 +20,15 @@ Overview
     Note that anonymity is not guaranteed, as transactions may be
     traced backwards to identify voiding actions of your past. See
     https://en.bitcoin.it/wiki/Anonymity for more information on 
-    this point.
+    that point.
 
 
 
 Usage
+
+    Start bitcoind if you plan to write data. Reads default to 
+    blockchain.info's API, but utilize the running node if one
+    exists. But a local node is required only for writes.
 
     Reading and writing:
      >  stone write --data="hello, world!"

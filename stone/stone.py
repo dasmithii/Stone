@@ -6,14 +6,15 @@
 	stone --version
 
 Options:
-	-h, --help     Show this screen.
-	--version      Show version.
+	-h, --help     Display this message.
+	--version      Display version.
 	--data=<>      Specify content in string form.
 	--path=<>      Specify path to content.
 	--tor          Perform operation over the Tor network. [default: False]
 """
 from docopt import docopt
 import btc
+import protocol
 
 
 def data(args):
