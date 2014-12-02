@@ -18,9 +18,14 @@ def squeeze(data):
 	"""
 	if len(data) != BYTES_IN_PAYLOAD:
 		raise BaseException('invalid payload length: %d - should be %d' % (len(data), BYTES_IN_PAYLOAD))
-	s = b'\x00' + data
-	s += bitcoin.core.Hash(s)[0:4]
-	return base58.encode(s)
+	if bitcoin.core.coreparams.NAME == 'mainnet':
+		data = chr(0) + data
+	elif bitcoin.core.coreparams.NAME == 'testnet':
+		data = chr(111) + data 
+	else:
+		raise 'invalid network mode'
+	data += bitcoin.core.Hash(data)[0:4]
+	return base58.encode(data)
 
 def extract(address):
 	"""Returns original form of bitcoin address payload."""

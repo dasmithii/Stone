@@ -15,6 +15,6 @@ setup(
     packages=['stone'],
     long_description=read('README'),
     entry_points = {
-        'console_scripts': ['stone=stone.stone:main']
+        'console_scripts': ['stone=stone.main:main']
     }
 )
