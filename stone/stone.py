@@ -10,16 +10,11 @@ def price_without_fee(data):
 
 
 def write(data, tor=False):
-	"""Encode data via protocol.py and attempt to publish it to
-	the main blockchain within one transaction of many outputs.
-
-	This is a hacky approach, using a subprocess shell call in
-	place of the bitcoin library - because the bitcoin library
-	doesn't currently provide a sendmany interface. Hopefully
-	this will change soon.
+	"""Encode data via protocol.py and attempt to publish it on
+	the blockchain within one transaction of many outputs.
 	"""
 	if tor:
-		raise NotImplementedError('Tor')
+		raise NotImplementedError('Tor for writing')
 
 	proxy = bitcoin.rpc.Proxy()
 	addresses = protocol.encode(data)

@@ -1,6 +1,6 @@
 """Usage:
-	stone [--testnet] read <txid> [--testnet] [--tor]
-	stone [--testnet] write (--path=<> | --data=<>) [--testnet] [--tor]
+	stone read <txid> [--testnet] [--tor]
+	stone write (--path=<> | --data=<>) [--testnet] [--tor]
 	stone price (--path=<> | --data=<>)
 	stone (-h | --help)
 	stone --version
@@ -17,7 +17,6 @@ from docopt import docopt
 import stone
 import protocol
 import bitcoin
-
 
 
 def main():
