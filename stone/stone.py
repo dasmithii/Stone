@@ -1,6 +1,7 @@
 import info
 import protocol
 import bitcoin.rpc
+import bitcoin.core
 import subprocess
 
 
@@ -46,4 +47,6 @@ def read(txid):
 
 	TODO: FINISH IMPLEMENTING
 	"""
+	if bitcoin.core.coreparams.NAME == 'testnet':
+		raise NotImplemented('reading from testnet')
 	return trusted_read(txid)
