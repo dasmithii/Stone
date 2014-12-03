@@ -12,7 +12,7 @@ Overview
     of Bitcoin as a whole.
 
     Note that anonymity is not guaranteed. Tor may be used to 
-    proxy read and write activity. But still, transactions may be
+    proxy read and write activity. But still, transactions can be
     traced backwards to identifying actions of your past. See
     https://en.bitcoin.it/wiki/Anonymity for more information on 
     that point.
