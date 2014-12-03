@@ -11,14 +11,9 @@ Overview
     world, and for all practical purposes, mirror the integrity
     of Bitcoin as a whole.
 
-    Unrelatedly, Tor may be used to anonymize read and write 
-    activity. Appending the --tor flag to Stone commands will
-    proxy your requests, decoupling you from your published 
-    content. But still, you may prove status as publisher via 
-    digital signing.
-
-    Note that anonymity is not guaranteed, as transactions may be
-    traced backwards to identify voiding actions of your past. See
+    Note that anonymity is not guaranteed. Tor may be used to 
+    proxy read and write activity. But still, transactions may be
+    traced backwards to identifying actions of your past. See
     https://en.bitcoin.it/wiki/Anonymity for more information on 
     that point.
 
@@ -51,4 +46,15 @@ Installation
     https://github.com/dasmithii/Yamba
     cd Yamba
     python setup.py install
+
+
+
+Testing
+
+    First, start your bitcoind test network:
+     >  bitcoind -testnet -daemon
+
+    Once it's ready... (in the root of this project):
+     >  python -m unittest discover
+
 

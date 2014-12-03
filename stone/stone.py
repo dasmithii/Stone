@@ -9,13 +9,10 @@ def price_without_fee(data):
 	return 0.00005430 * len(addresses)
 
 
-def write(data, tor=False):
+def write(data):
 	"""Encode data via protocol.py and attempt to publish it on
 	the blockchain within one transaction of many outputs.
 	"""
-	if tor:
-		raise NotImplementedError('Tor for writing')
-
 	proxy = bitcoin.rpc.Proxy()
 	addresses = protocol.encode(data)
 	mapping = {}
@@ -24,7 +21,7 @@ def write(data, tor=False):
 	return proxy.sendmany('', mapping)
 
 
-def trusted_read(txid, go_anon=False):
+def trusted_read(txid):
 	"""Reads transaction via blockchain.info API. 
 
 	This is nice because it doesn't require that callers have run
@@ -32,7 +29,6 @@ def trusted_read(txid, go_anon=False):
 	it relies on a centralized server. Use wallet_read() or 
 	local_read() whenever possible.
 	"""
-	info.using_tor = go_anon
 	transaction = info.transaction(txid)
 	addresses = []
 	for o in transaction['out']:
@@ -41,7 +37,7 @@ def trusted_read(txid, go_anon=False):
 	return protocol.decode(addresses)
 
 
-def read(txid, tor=False):
+def read(txid):
 	"""Decode data from transaction.
 
 	Depending on the configuration of bitcoind, non-wallet 
@@ -50,4 +46,4 @@ def read(txid, tor=False):
 
 	TODO: FINISH IMPLEMENTING
 	"""
-	return trusted_read(txid, tor)
+	return trusted_read(txid)

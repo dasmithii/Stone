@@ -1,6 +1,6 @@
 """Usage:
-	stone read <txid> [--testnet] [--tor]
-	stone write (--path=<> | --data=<>) [--testnet] [--tor]
+	stone read <txid> [--testnet]
+	stone write (--path=<> | --data=<>) [--testnet]
 	stone price (--path=<> | --data=<>)
 	stone (-h | --help)
 	stone --version
@@ -10,7 +10,6 @@ Options:
 	--version      Display version.
 	--data=<>      Specify content in string form.
 	--path=<>      Specify path to content.
-	--tor          Perform operation over the Tor network. [default: False]
 	--testnet      Run command on test network.            [default: False]
 """
 from docopt import docopt
@@ -35,9 +34,9 @@ def main():
 		output = '{:5.7f} - (w/o transaction fees)'.format(amount)
 		print(output)
 	elif args['read']:
-		print(stone.read(args['<txid>'], args['--tor']))
+		print(stone.read(args['<txid>']))
 	elif args['write']:
-		print(stone.write(data(), args['--tor']))
+		print(stone.write(data()))
 	else:
 		print(__doc__)
 
